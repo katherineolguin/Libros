@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>show and add favorits</title>
+</head>
+
+<body>
+
+    <body>
+        <header class="d-flex justify-content-between align-items-center text-light  text-center p-2 bg-dark mb-3">
+            <h1>Bienvenido!</h1>
+
+            <a href="/" class="btn btn-primary">Home</a>
+        </header>
+
+        <div class="col-10 mx-auto">
+            <div class=" row  justify-content-around ">
+
+                <h1> Titulo: {{libro.titulo}}</h1>
+
+                <div class="col-5 pb-3 pt-3">
+                    <table class="table table-striped  text-center">
+                        <thead class="bg-dark text-light">
+
+                            <th><b>Titulo</b></th>
+                            <th><b>Número paginas</b></th>
+                        </thead>
+
+                        {% for autor in libro.autor_fav %}
+
+                        <tbody>
+                            <td>{{autor.nombre}}</td>
+                            <td>{{autor.apellido}}</td>
+                        </tbody>
+                        {% endfor %}
+
+                    </table>
+                </div>
+
+
+                <div class="col-5 p-3">
+                    <div class="row">
+
+                        <form action="/add/autor/fav" method="POST">
+                            <div class="form-group ">
+
+
+                                <h1> Añadadir nuevo autor favorito</h1>
+
+                                <input type="hidden" name="libro_id" value="{{libro.id}}">
+                                <!-- Llamo al usuario_id de la tabla de favoritos (la union donde se agregan los favoritos) y al id de usuarios en un input oculto-->
+
+                                <label for="autor">Autor: </label> <!-- libro de def get_libro() -->
+                                <select name="usuario_id" class="form-control form-select">
+                                    <option selected></option>
+
+                                    {% for autor in autor_no_favorito %}
+                                    <option value="{{autor.id}}">{{autor.nombre}}</option>
+                                    {% endfor %}
+
+
+                                    <!-- libro.id = el valor que le di en en % for libro in libros_no_favoritos % -->
+                                </select>
+
+                                <div class="pt-3">
+                                    <input type="submit" class="btn btn-success" value="Añadir a favoritos">
+                                </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+    </body>
+
+</html>
